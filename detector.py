@@ -10,7 +10,7 @@ def main():
 
     if not os.path.exists(src_path):
         os.mkdir(src_path)
-    print('Input Path: '%os.path.abspath(src_path))
+    print('Input Path: ', os.path.abspath(src_path))
 
     db = Database(db_path)
     db.clear_alldata()
