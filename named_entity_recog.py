@@ -33,7 +33,6 @@ NAME_TO_SYMBOL = {}
 for sym in SYMBOL_TO_NAME:
     NAME_TO_SYMBOL[sym['name']] = sym['symbol']
 
-
 def get_symbol(company_name):
     '''
     It returns stock symbol of the company, given in parameter.
