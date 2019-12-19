@@ -1,0 +1,166 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ldamodel module &#8212; Disruptive News Detector 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="newswatcher module" href="newswatcher.html" />
+    <link rel="prev" title="hdpmodel module" href="hdpmodel.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-ldamodel">
+<span id="ldamodel-module"></span><h1>ldamodel module<a class="headerlink" href="#module-ldamodel" title="Permalink to this headline">¶</a></h1>
+<p>This class uses Latent Dirichlet method.</p>
+<dl class="class">
+<dt id="ldamodel.LDAModel">
+<em class="property">class </em><code class="descclassname">ldamodel.</code><code class="descname">LDAModel</code><a class="reference internal" href="_modules/ldamodel.html#LDAModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ldamodel.LDAModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="ldamodel.LDAModel.bigrams">
+<code class="descname">bigrams</code><span class="sig-paren">(</span><em>words</em>, <em>bi_min=15</em>, <em>tri_min=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ldamodel.html#LDAModel.bigrams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ldamodel.LDAModel.bigrams" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ldamodel.LDAModel.dictionary">
+<code class="descname">dictionary</code><em class="property"> = None</em><a class="headerlink" href="#ldamodel.LDAModel.dictionary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ldamodel.LDAModel.get_bigram">
+<code class="descname">get_bigram</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ldamodel.html#LDAModel.get_bigram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ldamodel.LDAModel.get_bigram" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ldamodel.LDAModel.get_corpus">
+<code class="descname">get_corpus</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ldamodel.html#LDAModel.get_corpus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ldamodel.LDAModel.get_corpus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Bigram Model, Corpus, id2word mapping</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="ldamodel.LDAModel.lda_train4">
+<code class="descname">lda_train4</code><em class="property"> = None</em><a class="headerlink" href="#ldamodel.LDAModel.lda_train4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ldamodel.LDAModel.processed_docs">
+<code class="descname">processed_docs</code><em class="property"> = []</em><a class="headerlink" href="#ldamodel.LDAModel.processed_docs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ldamodel.LDAModel.remove_stopwords">
+<code class="descname">remove_stopwords</code><span class="sig-paren">(</span><em>texts</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ldamodel.html#LDAModel.remove_stopwords"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ldamodel.LDAModel.remove_stopwords" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ldamodel.LDAModel.rev_train">
+<code class="descname">rev_train</code><em class="property"> = None</em><a class="headerlink" href="#ldamodel.LDAModel.rev_train" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ldamodel.LDAModel.run_unseendata">
+<code class="descname">run_unseendata</code><span class="sig-paren">(</span><em>text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ldamodel.html#LDAModel.run_unseendata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ldamodel.LDAModel.run_unseendata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ldamodel.LDAModel.sent_to_words">
+<code class="descname">sent_to_words</code><span class="sig-paren">(</span><em>sentences</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ldamodel.html#LDAModel.sent_to_words"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ldamodel.LDAModel.sent_to_words" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="ldamodel.LDAModel.stop_words">
+<code class="descname">stop_words</code><em class="property"> = None</em><a class="headerlink" href="#ldamodel.LDAModel.stop_words" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ldamodel.LDAModel.strip_newline">
+<code class="descname">strip_newline</code><span class="sig-paren">(</span><em>series</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ldamodel.html#LDAModel.strip_newline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ldamodel.LDAModel.strip_newline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="ldamodel.LDAModel.train_lda_model">
+<code class="descname">train_lda_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ldamodel.html#LDAModel.train_lda_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ldamodel.LDAModel.train_lda_model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">CS410—Final-project</a><ul>
+      <li>Previous: <a href="hdpmodel.html" title="previous chapter">hdpmodel module</a></li>
+      <li>Next: <a href="newswatcher.html" title="next chapter">newswatcher module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Noushad, Mani & Amit.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/ldamodel.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

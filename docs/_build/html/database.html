@@ -1,0 +1,140 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>database module &#8212; Disruptive News Detector 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dataviewer module" href="dataviewer.html" />
+    <link rel="prev" title="analyzer module" href="analyzer.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-database">
+<span id="database-module"></span><h1>database module<a class="headerlink" href="#module-database" title="Permalink to this headline">¶</a></h1>
+<p>A utility class to handle all Database operation. A file is used as database here.</p>
+<dl class="class">
+<dt id="database.Database">
+<em class="property">class </em><code class="descclassname">database.</code><code class="descname">Database</code><span class="sig-paren">(</span><em>db_path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.Database" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="database.Database.clear_alldata">
+<code class="descname">clear_alldata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.clear_alldata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.Database.clear_alldata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="database.Database.get_preprocessed_text">
+<code class="descname">get_preprocessed_text</code><span class="sig-paren">(</span><em>processed_doc_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.get_preprocessed_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.Database.get_preprocessed_text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="database.Database.get_unpreprocessed_text">
+<code class="descname">get_unpreprocessed_text</code><span class="sig-paren">(</span><em>unprocessed_doc_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.get_unpreprocessed_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.Database.get_unpreprocessed_text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="database.Database.insert_analyzed">
+<code class="descname">insert_analyzed</code><span class="sig-paren">(</span><em>processed_doc_id</em>, <em>upproc_docid</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.insert_analyzed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.Database.insert_analyzed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="database.Database.insert_preprocessed">
+<code class="descname">insert_preprocessed</code><span class="sig-paren">(</span><em>unprocessed_doc_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.insert_preprocessed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.Database.insert_preprocessed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="database.Database.insert_unprocessed">
+<code class="descname">insert_unprocessed</code><span class="sig-paren">(</span><em>filename</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.insert_unprocessed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.Database.insert_unprocessed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="database.Database.update_anlyzed">
+<code class="descname">update_anlyzed</code><span class="sig-paren">(</span><em>documnet_id</em>, <em>severity</em>, <em>sentiments</em>, <em>topic</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.update_anlyzed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.Database.update_anlyzed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="database.Database.update_preprocessed_text">
+<code class="descname">update_preprocessed_text</code><span class="sig-paren">(</span><em>processed_doc_id</em>, <em>preprocessed_text</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/database.html#Database.update_preprocessed_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#database.Database.update_preprocessed_text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">CS410—Final-project</a><ul>
+      <li>Previous: <a href="analyzer.html" title="previous chapter">analyzer module</a></li>
+      <li>Next: <a href="dataviewer.html" title="next chapter">dataviewer module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Noushad, Mani & Amit.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/database.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

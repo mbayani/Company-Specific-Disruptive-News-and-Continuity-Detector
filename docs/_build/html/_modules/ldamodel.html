@@ -1,0 +1,215 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ldamodel &#8212; Disruptive News Detector 1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for ldamodel</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">This class uses Latent Dirichlet method.</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="kn">import</span> <span class="nn">gensim</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">gensim.utils</span> <span class="k">import</span> <span class="n">simple_preprocess</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="k">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">DataFrame</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="LDAModel"><a class="viewcode-back" href="../ldamodel.html#ldamodel.LDAModel">[docs]</a><span class="k">class</span> <span class="nc">LDAModel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">processed_docs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">rev_train</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">stop_words</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">lda_train4</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rev_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;input_train.json&#39;</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rev_train</span><span class="p">[</span><span class="s1">&#39;text_len&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rev_train</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_words</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_words</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+            <span class="p">[</span><span class="s1">&#39;bank&#39;</span><span class="p">,</span> <span class="s1">&#39;banks&#39;</span><span class="p">,</span> <span class="s1">&#39;wells&#39;</span><span class="p">,</span> <span class="s1">&#39;fargo&#39;</span><span class="p">,</span> <span class="s1">&#39;deutsch&#39;</span><span class="p">,</span> <span class="s1">&#39;billion&#39;</span><span class="p">,</span> <span class="s1">&#39;million&#39;</span><span class="p">,</span> <span class="s1">&#39;ubs&#39;</span><span class="p">,</span> <span class="s1">&#39;glaxo&#39;</span><span class="p">,</span> <span class="s1">&#39;hot&#39;</span><span class="p">,</span> <span class="s1">&#39;citigroup&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;bancorp&#39;</span><span class="p">,</span> <span class="s1">&#39;water&#39;</span><span class="p">,</span> <span class="s1">&#39;deutsche&#39;</span><span class="p">])</span>
+
+<div class="viewcode-block" id="LDAModel.strip_newline"><a class="viewcode-back" href="../ldamodel.html#ldamodel.LDAModel.strip_newline">[docs]</a>    <span class="k">def</span> <span class="nf">strip_newline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">review</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">series</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="LDAModel.sent_to_words"><a class="viewcode-back" href="../ldamodel.html#ldamodel.LDAModel.sent_to_words">[docs]</a>    <span class="k">def</span> <span class="nf">sent_to_words</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentences</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="p">(</span><span class="n">gensim</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">simple_preprocess</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sentence</span><span class="p">),</span> <span class="n">deacc</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="LDAModel.remove_stopwords"><a class="viewcode-back" href="../ldamodel.html#ldamodel.LDAModel.remove_stopwords">[docs]</a>    <span class="k">def</span> <span class="nf">remove_stopwords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">texts</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">simple_preprocess</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">doc</span><span class="p">))</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop_words</span><span class="p">]</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="LDAModel.bigrams"><a class="viewcode-back" href="../ldamodel.html#ldamodel.LDAModel.bigrams">[docs]</a>    <span class="k">def</span> <span class="nf">bigrams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">bi_min</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">tri_min</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">bigram</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Phrases</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="n">bi_min</span><span class="p">)</span>
+        <span class="n">bigram_mod</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">phrases</span><span class="o">.</span><span class="n">Phraser</span><span class="p">(</span><span class="n">bigram</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bigram_mod</span></div>
+
+<div class="viewcode-block" id="LDAModel.get_corpus"><a class="viewcode-back" href="../ldamodel.html#ldamodel.LDAModel.get_corpus">[docs]</a>    <span class="k">def</span> <span class="nf">get_corpus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get Bigram Model, Corpus, id2word mapping</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">strip_newline</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sent_to_words</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">title</span><span class="p">))</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_stopwords</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="n">bigram</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bigrams</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="n">bigram</span> <span class="o">=</span> <span class="p">[</span><span class="n">bigram</span><span class="p">[</span><span class="n">review</span><span class="p">]</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+        <span class="n">id2word</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">bigram</span><span class="p">)</span>
+        <span class="n">id2word</span><span class="o">.</span><span class="n">filter_extremes</span><span class="p">(</span><span class="n">no_below</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">no_above</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+        <span class="n">id2word</span><span class="o">.</span><span class="n">compactify</span><span class="p">()</span>
+        <span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">id2word</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">bigram</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="p">,</span> <span class="n">bigram</span></div>
+
+<div class="viewcode-block" id="LDAModel.train_lda_model"><a class="viewcode-back" href="../ldamodel.html#ldamodel.LDAModel.train_lda_model">[docs]</a>    <span class="k">def</span> <span class="nf">train_lda_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">train_corpus4</span><span class="p">,</span> <span class="n">train_id2word4</span><span class="p">,</span> <span class="n">bigram_train4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_corpus</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rev_train</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;train_corpus4.pkl&#39;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">train_corpus4</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;train_id2word4.pkl&#39;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">train_id2word4</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;bigram_train4.pkl&#39;</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">bigram_train4</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lda_train4</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">LdaModel</span><span class="p">(</span><span class="n">corpus</span><span class="o">=</span><span class="n">train_corpus4</span><span class="p">,</span>
+                                                 <span class="n">num_topics</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                                                 <span class="n">id2word</span><span class="o">=</span><span class="n">train_id2word4</span><span class="p">,</span>
+                                                 <span class="n">chunksize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                                                 <span class="n">passes</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                                                 <span class="n">eval_every</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                                 <span class="n">per_word_topics</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----------Topics are -------------&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">topic</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lda_train4</span><span class="o">.</span><span class="n">print_topics</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topic: </span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">Words: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">topic</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-----------------------------------&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lda_train4</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="s1">&#39;lda_train4.model&#39;</span><span class="p">))</span>
+
+        <span class="c1"># self.lda_model = lda_train4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span> <span class="o">=</span> <span class="n">train_id2word4</span></div>
+
+<div class="viewcode-block" id="LDAModel.get_bigram"><a class="viewcode-back" href="../ldamodel.html#ldamodel.LDAModel.get_bigram">[docs]</a>    <span class="k">def</span> <span class="nf">get_bigram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">strip_newline</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sent_to_words</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">title</span><span class="p">))</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_stopwords</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="n">bigram</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bigrams</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="n">bigram</span> <span class="o">=</span> <span class="p">[</span><span class="n">bigram</span><span class="p">[</span><span class="n">review</span><span class="p">]</span> <span class="k">for</span> <span class="n">review</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">bigram</span></div>
+
+<div class="viewcode-block" id="LDAModel.run_unseendata"><a class="viewcode-back" href="../ldamodel.html#ldamodel.LDAModel.run_unseendata">[docs]</a>    <span class="k">def</span> <span class="nf">run_unseendata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+
+        <span class="c1"># Data preprocessing step for the unseen document</span>
+        <span class="c1"># bow_vector = self.dictionary.doc2bow(self.preprocess(text))</span>
+
+        <span class="n">testdata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">text</span><span class="p">]}</span>
+
+        <span class="n">testdataframe</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">testdata</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">])</span>
+
+        <span class="n">bigram_test</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_bigram</span><span class="p">(</span><span class="n">testdataframe</span><span class="p">)</span>
+
+        <span class="n">test_corpus</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">bigram_test</span><span class="p">]</span>
+
+        <span class="n">test_vecs1</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">top_topics1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lda_train4</span><span class="o">.</span><span class="n">get_document_topics</span><span class="p">(</span><span class="n">test_corpus</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">minimum_probability</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">top_topics1</span><span class="p">)</span>
+
+        <span class="c1"># topic_vec1 = [top_topics1[i][1] for i in range(2)]</span>
+        <span class="c1">#</span>
+        <span class="c1"># test_vecs1.append(topic_vec1)</span>
+        <span class="c1">#</span>
+        <span class="c1"># for index, score in sorted(self.lda_train4[test_vecs1], key=lambda tup: -1*tup[1]):</span>
+        <span class="c1">#     print(&quot;Score: {}\t Topic: {}&quot;.format(score, self.lda_train4.print_topic(index, 5)))</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;***************************************************&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Noushad, Mani & Amit.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
