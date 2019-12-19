@@ -1,6 +1,6 @@
-# Project Title
+# Disruptive News Detector
 
-One Paragraph of project description goes here
+In this project, we built a software to detect company-specific disruptive news and continuity of news from news articles in real-time and present the right discontinuity and severity information to the user.
 
 ## Getting Started
 
