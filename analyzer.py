@@ -1,4 +1,4 @@
-class Analyzer:
+class Analyzer(object):
     def __init__(self, db, ldamodel, topic_classifier, severity_classifier, sentiment_classifier, config):
         self.__db = db
         self.__ldamodel = ldamodel
