@@ -1,0 +1,9 @@
+
+[Settings]
+batch-runner = 1
+topic-to-watch = "Federal.fines"
+number-of-topics = 2
+use-hda-to-find-num-topics = 0
+show-stock-graph = 1
+run-hdp-model = 0
+
