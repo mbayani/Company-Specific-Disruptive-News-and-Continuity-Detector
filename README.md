@@ -49,6 +49,7 @@ Clone the repository and install all prerequisities.
 ```python
 python3 detector.py
 ```
+
 ##Further Improvements beyond project work
 * Enhance the application to integrate with third-party News service providers like Webhose.io, Dataminr and newsapi.org  to collect news in real-time 
 * Improve the logic to derive Severity using topic content changes (analysis within the text)
@@ -56,6 +57,7 @@ python3 detector.py
 * Use Hierarchical Dirichlet Process (HDP) to learn the number of topics and input that number to LDA instead of a fixed number of topics
 * Use the Topic model to uncover emerging/new topics in time series.
 * Reduce the number of dependent libraries
+
 ##References
 [LDA-Based Topic Strength Analysis](https://cai.type.sk/content/2017/6/lda-based-topic-strength-analysis/)
 
