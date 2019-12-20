@@ -24,7 +24,8 @@ It will display 2 graphs -
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+
 
 ### Prerequisites
 Before running this project, please make sure you have all the required python modules installed.
@@ -48,14 +49,23 @@ The prerequisites are defined with respect to **Python 3**. To install python li
 pip3 install -r requirements.txt
 ```
 
+If you get permission error while installing dependencies, then add "--user" to the command as below:
+```bash
+pip3 install -r requirements.txt --user
+```
+
+
 ### Installing
 Clone the repository and install all prerequisities.
+
 
 ## Usage
 
 ```python
 python3 detector.py
 ```
+Default mode is set to **Batch**. When you run it, it will look for news in 'input' folder and will process them. At the end, it will save 2 graphs, a graph showing news severity and a graph showing stock price of the company. 
+
 
 ## System Components
 ![System Components](docs/SystemArchitecture.JPG )
@@ -68,6 +78,7 @@ python3 detector.py
 * Use Hierarchical Dirichlet Process (HDP) to learn the number of topics and input that number to LDA instead of a fixed number of topics
 * Use the Topic model to uncover emerging/new topics in time series.
 * Reduce the number of dependent libraries
+
 
 ## References
 [LDA-Based Topic Strength Analysis](https://cai.type.sk/content/2017/6/lda-based-topic-strength-analysis/)
