@@ -57,6 +57,10 @@ Clone the repository and install all prerequisities.
 python3 detector.py
 ```
 
+## System Components
+![System Components](docs/SystemArchitecture.JPG )
+
+
 ## Further Improvements beyond project work
 * Enhance the application to integrate with third-party News service providers like Webhose.io, Dataminr and newsapi.org  to collect news in real-time 
 * Improve the logic to derive Severity using topic content changes (analysis within the text)
