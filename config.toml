@@ -1,9 +1,13 @@
 
 [Settings]
+# batch-runner config can have values '0' or '1'. '1' means run it in Batch mode, '0' depicts interactive mode.
 batch-runner = 1
+# Topic to watch. Do not change it.
 topic-to-watch = "Federal.fines"
 number-of-topics = 2
 use-hda-to-find-num-topics = 0
+# '1' means show Stock price graph of the company in the news. '0' will not show graph.
 show-stock-graph = 1
 run-hdp-model = 0
+# '1' means Run pre-processed models.
 use_preprocessed_models = 1
