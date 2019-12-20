@@ -1,3 +1,10 @@
+## Team Details
+
+Team members:
+1)	Amit Agrawal (amita3@illinois.edu)
+2)	Noushad Kunju-Muhammed (noushad2@illinois.edu)
+3)	Mani Bayani(mbayani2@illinois.edu) - Group Leader
+
 # Disruptive News Detector
 
 Disruptive/Negative news coverage, such as poor earnings reports or stories of bad corporate governance, normally decreases demand, meaning more people want to sell the stock, thereby lowering the market price. Demand can also be negatively affected by news stories covering economic and political uncertainty, or unexpected, negative events.
