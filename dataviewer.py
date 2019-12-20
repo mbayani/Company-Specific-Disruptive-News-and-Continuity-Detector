@@ -38,11 +38,12 @@ class Dataviewer(object):
             ax.xaxis.set_major_formatter(date_form)
             ax.set_ylim([0, 6])
             ax.grid(True)
-            plt.show()
 
             savepath = "wfc_news_graph_{}.png".format(datetime.datetime.now().strftime("%Y_%m_%d_%H_%M%S"))
-            plt.savefig(os.path.join('.', 'data', savepath) )
-            print("Graph saved as {}".format(savepath ) )
+            plt.savefig(os.path.join('.', 'data', savepath))
+            print("Graph saved as {}".format(savepath))
+
+            plt.show()
 
 
 
@@ -110,11 +111,14 @@ class Dataviewer(object):
         ax.xaxis.set_major_formatter(date_form)
         ax.set_ylim([0, 100])
         ax.grid(True)
-        plt.show()
 
         savepath = "wfc_stock_graph_{}.png".format(datetime.datetime.now().strftime("%Y_%m_%d_%H_%M%S"))
         plt.savefig(os.path.join('.', 'data', savepath))
         print("Graph saved as {}".format(savepath))
+        
+        plt.show()
+
+
 
 
 # def main():
