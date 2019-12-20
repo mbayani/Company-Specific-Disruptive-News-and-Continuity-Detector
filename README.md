@@ -100,20 +100,9 @@ For the implementation, in the train dataset and test dataset, there should be f
 * The user will be inform about the severity of incoming News and can compare it with previous severities visually. This option can help the user to decide about his/her portfolio of stocks.
 * A time series of the previous stock prices along with previous severities can help the user to follow the trend of his/her interested topic. 
 
-#### Prepare News Corpus for LDA and compute model parameters
-**Test corpus before Pre-Processing**
-
-
-![Test Corpus](docs/testcorpus.jpg)
-
-**Pre-processed output from test corpus**
-
-![Test Corpus](docs/preprocessed.jpg)
-
-#### LDA Model using genism
-**Compute model parameters on test corpus . Examples of Topics generated**
-
-![LDA Topics](docs/topicsgenerated.png)
+## A sample of ouput
+If you run the software with our predetermined training and test set, the output should look like this:
+![System Components](docs/output.JPG )
 
 ## Further Improvements beyond project work
 * Enhance the application to integrate with third-party News service providers like Webhose.io, Dataminr and newsapi.org  to collect news in real-time 
