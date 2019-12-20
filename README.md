@@ -95,6 +95,10 @@ For the implementation, in the train dataset and test dataset, there should be f
 * News with topic not interested (Eg: Sports in our implementation)
 * Some pother random News
 
+## Functionalities
+* The user can see the News that are related to his/her interest and the software would discard other News that are not in user's interest. 
+* The user will be inform about the severity of incoming News and can compare it with previous severities visually. This option can help the user to decide about his/her portfolio of stocks.
+
 
 ## Further Improvements beyond project work
 * Enhance the application to integrate with third-party News service providers like Webhose.io, Dataminr and newsapi.org  to collect news in real-time 
