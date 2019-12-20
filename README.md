@@ -50,7 +50,7 @@ Clone the repository and install all prerequisities.
 python3 detector.py
 ```
 
-##Further Improvements beyond project work
+## Further Improvements beyond project work
 * Enhance the application to integrate with third-party News service providers like Webhose.io, Dataminr and newsapi.org  to collect news in real-time 
 * Improve the logic to derive Severity using topic content changes (analysis within the text)
 * Predict the stock fluctuation using topic content changes
@@ -58,7 +58,7 @@ python3 detector.py
 * Use the Topic model to uncover emerging/new topics in time series.
 * Reduce the number of dependent libraries
 
-##References
+## References
 [LDA-Based Topic Strength Analysis](https://cai.type.sk/content/2017/6/lda-based-topic-strength-analysis/)
 
 [Exploring Topic Modelling with Gensim ](https://medium.com/@oyewusiwuraola/exploring-topic-modelling-with-gensim-on-the-essential-science-indicators-journals-list-1dc4d9f96d9c)
