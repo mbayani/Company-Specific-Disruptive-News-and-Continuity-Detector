@@ -53,7 +53,11 @@ If you get permission error while installing dependencies, then add "--user" to 
 ```bash
 pip3 install -r requirements.txt --user
 ```
-
+#### Note
+If the version of matplotlib on pip and conda are different, you might get errors on matplotlib attributes. In this case, use following command to solve the issue:
+```bash
+conda install matplotlib=3.1.2
+```
 
 ### Installing
 Clone the repository and install all prerequisities.
