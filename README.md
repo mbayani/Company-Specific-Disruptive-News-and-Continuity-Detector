@@ -63,7 +63,20 @@ python3 detector.py
 ```
 
 ## System Components
+
+This section details the functional software components and NLP components used in this project. Software components involved in feeding the news data to the NLP components, output result in Matplotlib graphs (Graphical User Interface), controls the flow of processing data in a pipeline and also stores the data in TinyDB database. We are using TinyDB , a lightweight document-oriented database written in pure Python which has no external dependencies. This is used for storing intermediate results and final output. The various modules in the systems are expected to identify and stream data which would further be fed into an analytical stage to display the trends. The below diagram is a high-level representation of the system components.
+
 ![System Components](docs/SystemArchitecture.JPG )
+
+
+
+**News Collector(News Watcher)** – Collect the news feeds from an input folder or read the news from the input folder as it comes over the time period. A file watcher component is implemented here to simulate the real-time news feeds and the user can interactively test the application as the news is fed into the system during a time period.
+
+**Pre-Processor** – Responsible for preprocessing the training data and test news using NLP components – Tokenizing, Sentence Segmentation, Stemming and Lemmatizing. 
+
+**Analyzer** – Responsible for training the models and also conduct a detailed analysis of the news data using NLP algorithms and derive topics, severity, and sentiments. NLP Components used here are Topic Modeling and Classification. Latent Dirichlet Allocation model is used here to derive the topics covered in the incoming news. The number of topics generated is fed into the Classifiers as feature vectors. One improvement we should do in this layer is to use the Hierarchical Dirichlet Process (HDP), which is a nonparametric extension of LDA, where topics are joined together in a hierarchy by using the nested Chinese restaurant process. It allows the number of topics to be unbound and learned from data and to be arranged in a hierarchy whose structure is learned from the data. Due to the property that HDP can determine an adaptive number of clusters, some topics will disappear, while some will emerge. This can be used with topic modeling to uncover emerging/new topics in a time series.
+
+**Application UI** – Display the graph using MatplotLib and TinyDB as the backend data source for the graphs.
 
 
 ## Further Improvements beyond project work
