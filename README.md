@@ -99,6 +99,19 @@ For the implementation, in the train dataset and test dataset, there should be f
 * The user can see the News that are related to his/her interest and the software would discard other News that are not in user's interest. 
 * The user will be inform about the severity of incoming News and can compare it with previous severities visually. This option can help the user to decide about his/her portfolio of stocks.
 
+####Prepare News Corpus for LDA and compute model parameters
+*Test corpus before Pre-Processing*
+
+
+![Test Corpus](docs/testcorpus.jpg)
+
+**Pre-processed output from test corpus**
+
+![Test Corpus](docs/preprocessed.jpg)
+
+####LDA Model using genism
+**Compute model parameters on test corpus . Examples of Topics generated**
+![LDA Topics](docs/topicsgenerated.png)
 
 ## Further Improvements beyond project work
 * Enhance the application to integrate with third-party News service providers like Webhose.io, Dataminr and newsapi.org  to collect news in real-time 
