@@ -115,7 +115,7 @@ class Dataviewer(object):
         savepath = "wfc_stock_graph_{}.png".format(datetime.datetime.now().strftime("%Y_%m_%d_%H_%M%S"))
         plt.savefig(os.path.join('.', 'data', savepath))
         print("Graph saved as {}".format(savepath))
-        
+
         plt.show()
 
 

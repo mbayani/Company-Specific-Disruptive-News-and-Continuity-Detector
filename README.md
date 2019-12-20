@@ -136,7 +136,7 @@ Test data to test the unseen news are available in the “repository folder”. 
 If you run the software with our predetermined training and test sets, the output should look like this:
 ![System Components](docs/output.JPG )
 On the left hand side, you can see the plot of News severity for Wells Fargo and on the right hand side, its corresponded stock price for the same time slot.
-The graphs are saved in 'data' folder in PNG format with timestamp on it.
+The graphs are saved in 'data' folder in PNG format with timestamp on it. The graph files generated are wfc_news_graph_{timestamp}.pngand  wfc_stock_graph_{timestamp}.png
 
 ## Further Improvements beyond project work
 * Enhance the application to integrate with third-party News service providers like Webhose.io, Dataminr and newsapi.org  to collect news in real-time 
