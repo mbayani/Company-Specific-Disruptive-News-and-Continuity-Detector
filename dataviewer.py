@@ -1,6 +1,7 @@
 '''
 A utility class to plot graphs. It is used to show severity of Disruptive News and the Stock price.
 '''
+import os
 import datetime
 
 import matplotlib.pyplot as plt
@@ -40,8 +41,10 @@ class Dataviewer(object):
             plt.show()
 
             savepath = "wfc_news_graph_{}.png".format(datetime.datetime.now().strftime("%Y_%m_%d_%H_%M%S"))
-            plt.savefig(savepath )
+            plt.savefig(os.path.join('.', 'data', savepath) )
             print("Graph saved as {}".format(savepath ) )
+
+
 
     def get_data_for_graph(self):
         # db_analyzed = TinyDB('.\data\db_analyzed.json')
@@ -110,7 +113,7 @@ class Dataviewer(object):
         plt.show()
 
         savepath = "wfc_stock_graph_{}.png".format(datetime.datetime.now().strftime("%Y_%m_%d_%H_%M%S"))
-        plt.savefig(savepath)
+        plt.savefig(os.path.join('.', 'data', savepath))
         print("Graph saved as {}".format(savepath))
 
 
