@@ -22,14 +22,14 @@ It will display 2 graphs -
 2) Stock price of the company during that time period
 
 
-## Getting Started
+## Setup and Usage
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
 
 
 ### Prerequisites
 Before running this project, please make sure you have all the required python modules installed.
-The software is using below python modules.
+The software is using below python modules. Refer the section "Install Prerequisites" for how to install the prerequisites.
 * gensim
 * matplotlib
 * nltk
@@ -42,6 +42,18 @@ The software is using below python modules.
 * tinydb
 * toml
 
+### First Clone the Project
+Clone this project repository to your machine.
+
+### Verify the project structure
+
+
+Verify the structure of the project. The picture below is taken from Winodows machine. If you use Linux or MAC you should have the similar structure.
+
+
+![Project Structure](docs/projectstructure.JPG )
+
+### Install Prerequisites
 The prerequisites are defined with respect to **Python 3**. To install python libraries, run below command:
 (make sure 'requirements.txt' file is available where you are running it )
 
@@ -59,22 +71,12 @@ If the version of matplotlib on pip and conda are different, you might get error
 conda install matplotlib=3.1.2
 ```
 
-### Installing
-Clone the repository and install all prerequisities.
-
-**Verify the project structure.** 
-
-The picture below is taken from Winodows machine. If you use Linux or MAC you should have the similar structure.
-
-
-![Project Structure](docs/projectstructure.JPG )
-
 ## Usage
-
+To run the project execute the below command from your installation folder. detector.py is the main entry point for the application.
 ```python
 python3 detector.py
 ```
-Default mode is set to **Batch**. When you run it, it will look for news in 'input' folder and will process them. At the end, it will save 2 graphs, a graph showing news severity and a graph showing stock price of the company. 
+Default mode is set to **Batch** in the config.toml file. When you run it, it will look for news in 'repository' folder and will process them. At the end, it will save 2 graphs, a graph showing news severity and a graph showing stock price of the company. 
 
 
 ## System Components
