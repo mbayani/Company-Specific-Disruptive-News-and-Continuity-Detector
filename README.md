@@ -15,7 +15,7 @@ There are 2 modes to run it (driven by settings)- 1) Batch Mode and 2) Continuou
 
 1) **Batch Mode** - In this mode, some news are already copied in the input folder. Program process each news one-by-one and determines if news is negative for a company or not and what is the severity level. It shows the news severity on graph. Along with it, it pulls the stock price of that company during that time period. Trying to show the coorelation between news and its stock price.
 
-2) **Continuous Monitoring** - We can run the program to process live news feed. Program will monito for any new news dropped in an input folder. As soon as news is dropped in a folder, it will be processed, stock process are pulled to show the effect of news.
+2) **Continuous Monitoring** - We can run the program to process live news feed. Program will monitor for any new news dropped in an input folder. As soon as news is dropped in a folder, it will be processed, stock process are pulled to show the effect of news.
 
 It will display 2 graphs - 
 1) Graph that shows severity of the disruptive news 
