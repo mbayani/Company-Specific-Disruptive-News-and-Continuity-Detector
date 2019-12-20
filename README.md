@@ -103,7 +103,7 @@ For the implementation, in the train dataset and test dataset, there should be f
 ## A Sample of Ouput
 If you run the software with our predetermined training and test sets, the output should look like this:
 ![System Components](docs/output.JPG )
-
+On the left hand side, you can see the plot of News severity for Wells Fargo and on the right hand side, its corresponded stock price for the same time spot.
 ## Further Improvements beyond project work
 * Enhance the application to integrate with third-party News service providers like Webhose.io, Dataminr and newsapi.org  to collect news in real-time 
 * Improve the logic to derive Severity using topic content changes (analysis within the text)
