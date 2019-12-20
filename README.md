@@ -62,6 +62,12 @@ conda install matplotlib=3.1.2
 ### Installing
 Clone the repository and install all prerequisities.
 
+**Verify the project structure.** 
+
+The picture below is taken from Winodows machine. If you use Linux or MAC you should have the similar structure.
+
+
+![Project Structure](docs/projectstructure.JPG )
 
 ## Usage
 
