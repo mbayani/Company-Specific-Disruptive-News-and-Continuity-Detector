@@ -84,6 +84,7 @@ This section details the functional software components and NLP components used 
 **Pre-Processor** – Responsible for preprocessing the training data and test news using NLP components – Tokenizing, Sentence Segmentation, Stemming and Lemmatizing. 
 
 **Analyzer** – Responsible for training the models and also conduct a detailed analysis of the news data using NLP algorithms and derive topics, severity, and sentiments. NLP Components used here are Topic Modeling and Classification. Latent Dirichlet Allocation model is used here to derive the topics covered in the incoming news. The number of topics generated is fed into the Classifiers as feature vectors. One improvement we should do in this layer is to use the Hierarchical Dirichlet Process (HDP), which is a nonparametric extension of LDA, where topics are joined together in a hierarchy by using the nested Chinese restaurant process. It allows the number of topics to be unbound and learned from data and to be arranged in a hierarchy whose structure is learned from the data. Due to the property that HDP can determine an adaptive number of clusters, some topics will disappear, while some will emerge. This can be used with topic modeling to uncover emerging/new topics in a time series.
+$log(x)$
 
 **Application UI** – Display the graph using MatplotLib and TinyDB as the backend data source for the graphs.
 
