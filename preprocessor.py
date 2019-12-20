@@ -5,7 +5,6 @@
 import nltk
 from nltk.tokenize import word_tokenize
 
-# from nltk.stem import PorterStemmer
 
 # Download nltk packages used in this example
 nltk.download('stopwords', quiet=True)

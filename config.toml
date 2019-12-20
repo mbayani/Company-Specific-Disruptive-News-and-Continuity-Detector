@@ -6,4 +6,4 @@ number-of-topics = 2
 use-hda-to-find-num-topics = 0
 show-stock-graph = 1
 run-hdp-model = 0
-
+use_preprocessed_models = 1

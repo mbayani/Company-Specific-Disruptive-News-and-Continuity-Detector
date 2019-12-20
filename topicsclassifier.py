@@ -1,12 +1,10 @@
 import os
 import pickle
-
 import gensim
 import numpy as np
 import pandas as pd
 from pandas import DataFrame
 from sklearn.linear_model import LogisticRegression
-
 
 class TopicsClassifier(object):
     rev_train = None
@@ -53,9 +51,12 @@ class TopicsClassifier(object):
         print(y_pred)
 
     def run_unseendata(self, unseen_text):
+        print("Test News before pre-processing: {}".format(unseen_text))
         testdata = {'title': [unseen_text]}
         testdataframe = DataFrame(testdata, columns=['title'])
         bigram_test = self.__ldamodel.get_bigram(testdataframe)
+
+        print("Test News After pre-processing: {}".format(bigram_test))
 
         test_corpus = [self.train_id2word.doc2bow(text) for text in bigram_test]
 

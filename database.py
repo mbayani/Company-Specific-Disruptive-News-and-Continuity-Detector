@@ -45,7 +45,7 @@ class Database(object):
         return unprocessed_text
 
     def update_preprocessed_text(self, processed_doc_id, preprocessed_text):
-        self.db_preprocessed.update({'text': preprocessed_text}, doc_ids=[processed_doc_id])
+        self.db_preprocessed.update({'title': preprocessed_text}, doc_ids=[processed_doc_id])
 
     def update_anlyzed(self, documnet_id, severity, sentiments, topic):
         self.db_analyzed.update({'topic': topic, 'severity': str(severity), 'sentiments': str(sentiments)},
@@ -53,5 +53,5 @@ class Database(object):
 
     def get_preprocessed_text(self, processed_doc_id):
         rec = self.db_preprocessed.get(doc_id=processed_doc_id)
-        processed_text = rec["text"]
+        processed_text = rec["title"]
         return processed_text

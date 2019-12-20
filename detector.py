@@ -23,10 +23,8 @@ pip3 install -r requirements.txt
 '''
 import os
 import time
-
 import nltk
 import toml
-
 from SentimentsClassifier import SentimentsClassifier
 from SeverityClassifier import SeverityClassifier
 from database import Database
@@ -81,10 +79,11 @@ def main():
         print("Number of topics estimation by HDP: {}".format(numtopics))
         print('.......HDP Modeling Completed......')
 
-    # First create the LDA model
-    print('.......LDA Modeling started......')
-    ldamodel.train_lda_model()
-    print('.......LDA Modeling Completed......')
+    if config['Settings']['use_preprocessed_models'] == 0:
+        #First create the LDA model
+        print('.......LDA Modeling started......')
+        ldamodel.train_lda_model()
+        print('.......LDA Modeling Completed......')
 
     topic_classifier = TopicsClassifier(ldamodel)
     severity_classifier = SeverityClassifier(ldamodel)

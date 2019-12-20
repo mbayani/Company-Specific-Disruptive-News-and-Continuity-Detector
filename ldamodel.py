@@ -4,16 +4,20 @@ This class uses Latent Dirichlet method.
 '''
 import os
 import pickle
-
-import gensim
 import nltk
 import pandas as pd
-from gensim.utils import simple_preprocess
-from nltk.corpus import stopwords
 from pandas import DataFrame
+nltk.download('stopwords')
+import gensim.corpora as corpora
+from gensim.models import CoherenceModel
+from nltk.corpus import stopwords
+import gensim
+from gensim.utils import simple_preprocess
+from nltk.stem import WordNetLemmatizer, SnowballStemmer
 
-nltk.download('stopwords', quiet=True)
+nltk.download('wordnet')
 
+stemmer = SnowballStemmer("english")
 
 class LDAModel(object):
     processed_docs = []
@@ -30,8 +34,7 @@ class LDAModel(object):
         self.stop_words = stopwords.words('english')
 
         self.stop_words.extend(
-            ['bank', 'banks', 'wells', 'fargo', 'deutsch', 'billion', 'million', 'ubs', 'glaxo', 'hot', 'citigroup',
-             'bancorp', 'water', 'deutsche'])
+            ['wells', 'fargo', 'deutsch', 'ubs', 'glaxo', 'million','citigroup', 'billion', 'america', 'bancorp', 'deutsche', 'cole', 'anthoni' ])
 
     def strip_newline(self, series):
         return [review.replace('\n', '') for review in series]
@@ -48,6 +51,20 @@ class LDAModel(object):
         bigram_mod = gensim.models.phrases.Phraser(bigram)
         return bigram_mod
 
+    def lemmatize_stemming(self, text):
+        return stemmer.stem(WordNetLemmatizer().lemmatize(text, pos='v'))
+
+    # Tokenize and lemmatize
+    def preprocess(self, text):
+
+
+        result = []
+        for token in gensim.utils.simple_preprocess(text):
+            if token not in gensim.parsing.preprocessing.STOPWORDS and len(token) > 3:
+                result.append(self.lemmatize_stemming(token))
+
+        return " ".join(result)
+
     def get_corpus(self, df):
         """
         Get Bigram Model, Corpus, id2word mapping
@@ -58,12 +75,24 @@ class LDAModel(object):
         bigram = self.bigrams(words)
         bigram = [bigram[review] for review in words]
         id2word = gensim.corpora.Dictionary(bigram)
-        id2word.filter_extremes(no_below=0, no_above=0.8)
+        id2word.filter_extremes(no_below=0, no_above=0.5, keep_n=1000)
         id2word.compactify()
         corpus = [id2word.doc2bow(text) for text in bigram]
         return corpus, id2word, bigram
 
     def train_lda_model(self):
+
+        print('**************Training data for LDA before pre-processing********************')
+        for txt in self.rev_train['title'] :
+            print(txt)
+        print('*****************************************************************************')
+
+        self.rev_train['title'] = self.rev_train.title.apply(lambda x: self.preprocess(x))
+
+        print('**************Training data for LDA after pre-processing********************')
+        for txt in self.rev_train['title'] :
+            print(txt)
+        print('*****************************************************************************')
 
         train_corpus4, train_id2word4, bigram_train4 = self.get_corpus(self.rev_train)
 
@@ -75,12 +104,13 @@ class LDAModel(object):
             pickle.dump(bigram_train4, f)
 
         self.lda_train4 = gensim.models.LdaModel(corpus=train_corpus4,
-                                                 num_topics=2,
-                                                 id2word=train_id2word4,
-                                                 chunksize=100,
-                                                 passes=50,
-                                                 eval_every=1,
-                                                 per_word_topics=True)
+                                            num_topics=2,
+                                            id2word=train_id2word4,
+                                            chunksize=100,
+                                            passes=50,
+                                            random_state= 1000,
+                                            eval_every=1,
+                                            per_word_topics=True)
 
         print('----------Topics are -------------')
 

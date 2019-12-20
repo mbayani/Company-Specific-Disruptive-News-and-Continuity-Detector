@@ -40,12 +40,12 @@ class DNDFileEventHandler(PatternMatchingEventHandler):
             obj = json.loads(data)
             upproc_docid = self.__db.insert_unprocessed(file_name, obj)
 
-            self.__ldamodel.run_unseendata(str(obj['title']))
+            #self.__ldamodel.run_unseendata(str(obj['title']))
 
-            # PRE-PROCESSING
-            print('Started Pre-Processsing .......')
+            #PRE-PROCESSING
+            #print('Started Pre-Processsing .......')
             preproc_docid = self.__preprocessor.preprocess(upproc_docid)
-            print('Completed Pre-Processsing .......')
+            #print('Completed Pre-Processsing .......')
 
             # ANALYZE
             print('Started Analyzing .......')

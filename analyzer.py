@@ -31,7 +31,7 @@ class Analyzer(object):
             severity =   self.__severity_classifier.run_unseendata(text)
             sentiments = self.__sentiment_classifier.run_unseendata(text)
 
-            print("Text: {}".format(text))
+            #print("Text: {}".format(text))
             print("Severity: {}".format(severity))
             print("Sentiment: {}".format(sentiments))
 

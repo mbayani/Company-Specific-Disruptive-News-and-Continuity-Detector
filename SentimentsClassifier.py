@@ -1,12 +1,10 @@
 import os
 import pickle
-
 import gensim
 import numpy as np
 import pandas as pd
 from pandas import DataFrame
 from sklearn.linear_model import LogisticRegression
-
 
 class SentimentsClassifier(object):
     rev_train = None
