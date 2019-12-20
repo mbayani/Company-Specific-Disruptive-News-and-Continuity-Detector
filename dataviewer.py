@@ -38,8 +38,10 @@ class Dataviewer(object):
             ax.set_ylim([0, 6])
             ax.grid(True)
             plt.show()
-            plt.savefig('WFC.png')
-            print('Graph saved as "WFC.png"')
+
+            savepath = "wfc_news_graph_{}.png".format(datetime.datetime.now().strftime("%Y_%m_%d_%H_%M%S"))
+            plt.savefig(savepath )
+            print("Graph saved as {}".format(savepath ) )
 
     def get_data_for_graph(self):
         # db_analyzed = TinyDB('.\data\db_analyzed.json')
@@ -106,8 +108,11 @@ class Dataviewer(object):
         ax.set_ylim([0, 100])
         ax.grid(True)
         plt.show()
-        plt.savefig('WFC_stock_movement.png')
-        print('Graph saved as "WFC_stock_movement.png"')
+
+        savepath = "wfc_stock_graph_{}.png".format(datetime.datetime.now().strftime("%Y_%m_%d_%H_%M%S"))
+        plt.savefig(savepath)
+        print("Graph saved as {}".format(savepath))
+
 
 # def main():
 #     dt = Dataviewer(None)
