@@ -34,7 +34,7 @@ The software is using below python modules.
 * tinydb
 * toml
 
-The prerequisites are defined with respect to Python 3.x. To install python libraries, run below command:
+The prerequisites are defined with respect to **Python 3**. To install python libraries, run below command:
 (make sure 'requirements.txt' file is available where you are running it )
 
 ```bash
