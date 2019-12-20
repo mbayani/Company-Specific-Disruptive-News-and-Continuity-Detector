@@ -93,7 +93,7 @@ Upon excuting the program, the analyzer would use LDA to find News that are rela
 For the implementation, in the train dataset and test dataset, there should be following information:
 * News with Interested topics (Eg: Federal.Fines in our implementation)
 * News with topic not interested (Eg: Sports in our implementation)
-* Some pother random News
+* Some other random News
 
 ## Functionalities
 * The user can see the News that are related to his/her interest and the software would discard other News that are not in user's interest. 
