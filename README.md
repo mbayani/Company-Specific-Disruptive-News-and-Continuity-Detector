@@ -61,6 +61,7 @@ Clone the repository and install all prerequisities.
 ```python
 python3 detector.py
 ```
+Default mode is set to **Batch**. When you run it, it will look for news in 'input' folder and will process them. At the end, it will save 2 graphs, a graph showing news severity and a graph showing stock price of the company. 
 
 ## System Components
 ![System Components](docs/SystemArchitecture.JPG )
