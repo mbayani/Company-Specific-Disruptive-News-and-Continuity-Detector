@@ -98,6 +98,7 @@ For the implementation, in the train dataset and test dataset, there should be f
 ## Functionalities
 * The user can see the News that are related to his/her interest and the software would discard other News that are not in user's interest. 
 * The user will be inform about the severity of incoming News and can compare it with previous severities visually. This option can help the user to decide about his/her portfolio of stocks.
+* A time series of the previous stock prices along with previous severities can help the user to follow the trend of his/her interested topic. 
 
 ####Prepare News Corpus for LDA and compute model parameters
 *Test corpus before Pre-Processing*
