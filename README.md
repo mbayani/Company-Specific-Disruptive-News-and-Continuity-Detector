@@ -48,6 +48,11 @@ The prerequisites are defined with respect to **Python 3**. To install python li
 pip3 install -r requirements.txt
 ```
 
+If you get permission error while installing dependencies, then add "--user" to the command as below:
+```bash
+pip3 install -r requirements.txt --user
+```
+
 ### Installing
 Clone the repository and install all prerequisities.
 
