@@ -54,7 +54,7 @@ If you get permission error while installing dependencies, then add "--user" to 
 pip3 install -r requirements.txt --user
 ```
 #### Note:
-If the version of matplotlib on pip and conda are different, you might get errors on matplotlib attributes. In this case, use following command to solve the issue:
+If the version of matplotlib on pip and conda are different, you might get errors on matplotlib attributes. In this case, use the following command to solve the issue:
 ```bash
 conda install matplotlib=3.1.2
 ```
@@ -99,28 +99,17 @@ Upon excuting the program, the analyzer would use LDA to find News that are rela
 For the implementation, in the train dataset and test dataset, there should be following information:
 * News with Interested topics (Eg: Federal.Fines in our implementation)
 * News with topic not interested (Eg: Sports in our implementation)
-* Some pother random News
+* Some other random News
 
 ## Functionalities
 * The user can see the News that are related to his/her interest and the software would discard other News that are not in user's interest. 
 * The user will be inform about the severity of incoming News and can compare it with previous severities visually. This option can help the user to decide about his/her portfolio of stocks.
 * A time series of the previous stock prices along with previous severities can help the user to follow the trend of his/her interested topic. 
 
-#### Prepare News Corpus for LDA and compute model parameters
-**Test corpus before Pre-Processing**
-
-
-![Test Corpus](docs/testcorpus.jpg)
-
-**Pre-processed output from test corpus**
-
-![Test Corpus](docs/preprocessed.jpg)
-
-#### LDA Model using genism
-**Compute model parameters on test corpus . Examples of Topics generated**
-
-![LDA Topics](docs/topicsgenerated.png)
-
+## A Sample of Ouput
+If you run the software with our predetermined training and test sets, the output should look like this:
+![System Components](docs/output.JPG )
+On the left hand side, you can see the plot of News severity for Wells Fargo and on the right hand side, its corresponded stock price for the same time spot.
 ## Further Improvements beyond project work
 * Enhance the application to integrate with third-party News service providers like Webhose.io, Dataminr and newsapi.org  to collect news in real-time 
 * Improve the logic to derive Severity using topic content changes (analysis within the text)
