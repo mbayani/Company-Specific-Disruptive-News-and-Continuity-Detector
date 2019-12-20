@@ -89,6 +89,12 @@ Upon excuting the program, the analyzer would use LDA to find News that are rela
 
 **Application UI** – Display the graph using MatplotLib and TinyDB as the backend data source for the graphs.
 
+## Datasets
+For the implementation, in the train dataset and test dataset, there should be following information:
+* News with Interested topics (Eg: Federal.Fines in our implementation)
+* News with topic not interested (Eg: Sports in our implementation)
+* Some pother random News
+
 
 ## Further Improvements beyond project work
 * Enhance the application to integrate with third-party News service providers like Webhose.io, Dataminr and newsapi.org  to collect news in real-time 
