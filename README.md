@@ -106,7 +106,7 @@ For the implementation, in the train dataset and test dataset, there should be f
 * The user will be inform about the severity of incoming News and can compare it with previous severities visually. This option can help the user to decide about his/her portfolio of stocks.
 * A time series of the previous stock prices along with previous severities can help the user to follow the trend of his/her interested topic. 
 
-#### Prepare News Corpus for LDA and compute model parameters
+### Prepare News Corpus for LDA and compute model parameters
 *Test corpus before Pre-Processing*
 
 
@@ -116,12 +116,12 @@ For the implementation, in the train dataset and test dataset, there should be f
 
 ![Test Corpus](docs/preprocessed.jpg)
 
-#### LDA Model using genism
+### LDA Model using genism
 **Compute model parameters on test corpus . Examples of Topics generated**
 ![LDA Topics](docs/topicsgenerated.png)
 
 
-#### Test with unseen news Feeds
+### Test with unseen news Feeds
 Test data to test the unseen news are available in the “repository folder”. In batch mode the system pickup these files in the same order and process one by one
 
 ![LDA Topics](docs/testdata_unseen.JPG)
@@ -130,7 +130,7 @@ Test data to test the unseen news are available in the “repository folder”. 
 
 ![Analys Output](docs/analysisoutput.jpg)
 
-#### Final Result
+### Final Result
 If you run the software with our predetermined training and test sets, the output should look like this:
 ![System Components](docs/output.JPG )
 On the left hand side, you can see the plot of News severity for Wells Fargo and on the right hand side, its corresponded stock price for the same time slot.
