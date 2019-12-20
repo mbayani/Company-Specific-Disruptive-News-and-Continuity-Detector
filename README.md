@@ -100,8 +100,8 @@ For the implementation, in the train dataset and test dataset, there should be f
 * The user will be inform about the severity of incoming News and can compare it with previous severities visually. This option can help the user to decide about his/her portfolio of stocks.
 * A time series of the previous stock prices along with previous severities can help the user to follow the trend of his/her interested topic. 
 
-####Prepare News Corpus for LDA and compute model parameters
-*Test corpus before Pre-Processing*
+#### Prepare News Corpus for LDA and compute model parameters
+**Test corpus before Pre-Processing**
 
 
 ![Test Corpus](docs/testcorpus.jpg)
@@ -110,8 +110,9 @@ For the implementation, in the train dataset and test dataset, there should be f
 
 ![Test Corpus](docs/preprocessed.jpg)
 
-####LDA Model using genism
+#### LDA Model using genism
 **Compute model parameters on test corpus . Examples of Topics generated**
+
 ![LDA Topics](docs/topicsgenerated.png)
 
 ## Further Improvements beyond project work
